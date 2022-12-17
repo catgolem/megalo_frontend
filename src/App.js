@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { RecentSchedule } from './RecentSchedule';
-import { useEffect, useLayoutEffect, useState } from "react";
+import {useLayoutEffect, useState } from "react";
+import { AddEventButton } from './AddEventButton';
 
 
 function App() {
@@ -18,10 +18,12 @@ function App() {
 
     //setDataでdataにresponse.dataを代入する。
   });
-
+  
   return (
-    <div>
+    <div className='grid grid-rows-[100px,_30px]'>
       <RecentSchedule data={data}/>
+      <div className='fixed bottom-10 right-10 p-2'><AddEventButton/></div>
+      
     </div>
   );
 }

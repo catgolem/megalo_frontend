@@ -27,15 +27,15 @@ export function RecentSchedule(props){
 
 
     return (
-        <div className="grid grid-cols-[100px,_1fr,_100px]">
-            <button onClick={()=>handleClick(-1)} className="bg-yellow-100 duration-300 hover:bg-yellow-300">
+        <div className="grid grid-cols-[1fr,_6fr,_1fr]">
+            <button onClick={()=>handleClick(-1)} className="btn">
                 ←</button>
             <div className="grid grid-cols-3">
                 <SimpleSchedule date={date} schedules={ReturnSch(date)}/>
                 <SimpleSchedule date={date+1} schedules={ReturnSch(date+1)}/>
                 <SimpleSchedule date={date+2} schedules={ReturnSch(date+2)}/>
             </div>
-            <button onClick={()=>handleClick(1)} className="bg-yellow-100 duration-300 hover:bg-yellow-300">→</button>
+            <button onClick={()=>handleClick(1)} className="btn">→</button>
         </div>
     )
 }
