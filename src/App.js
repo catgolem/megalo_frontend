@@ -3,6 +3,7 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Todaysche from './Todayschedule';
 import Monthsche from './monthschedelu';
+import Calendar from './monthschedelu';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       </TabPanel>
       <TabPanel>
           <h2>
+            <Calendar/>
           </h2>
       </TabPanel>
       <TabPanel>

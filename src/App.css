@@ -6,6 +6,32 @@
   text-align: center;
 }
 
+.right{
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left:0fr;
+  width: 100vw;
+  z-index: 100;
+  display: flex;
+  align-items: center;	    
+  justify-content: center;
+  overflow: hidden scroll;
+}
+
+.left{
+  position: fixed;
+  top: 0; right: 0fr; bottom: 0; left:0;
+  width: 100vw;
+  z-index: 100;
+  display: flex;
+  align-items: center;	    
+  justify-content: center;
+  overflow: hidden scroll;
+}
+
+.example{
+  font-size: 10px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
