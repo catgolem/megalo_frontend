@@ -2,8 +2,8 @@ import './App.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Todaysche from './Todayschedule';
-import Monthsche from './monthschedelu';
 import Calendar from './monthschedelu';
+import Setting from './setting';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       </TabPanel>
       <TabPanel>
           <h2>
-              タグの追加とか
+              <Setting/>
           </h2>
       </TabPanel>
   </Tabs>

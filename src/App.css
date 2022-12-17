@@ -28,8 +28,28 @@
   overflow: hidden scroll;
 }
 
+.outer{
+  margin-top:20px;
+  padding:50px;
+  width:300px;
+  background:#00F000;
+  color:#000000;
+  text-align:center;
+  font-size:30px;
+  font-weight:bold;
+  }
+
 .example{
   font-size: 10px;
+}
+
+.inputText {
+  padding: 10px;
+}
+
+.submitButton {
+  padding: 8px 15px;
+  cursor: pointer;
 }
 
 .App-logo {
