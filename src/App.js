@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import { RecentSchedule } from './RecentSchedule';
+import { useEffect, useLayoutEffect, useState } from "react";
+
 
 function App() {
+  const [data ,setData] = useState([
+    { title: "adobi", content: "", date:20221217, start:900},
+    { title: "kadai", content: "", date:20221217, start:1300},
+    { title: "kadai", content: "", date:20221218, start:1100},
+    { title: "kadai", content: "", date:20221219, start:1500}
+  ]);
+
+  useLayoutEffect(() => {
+    var respose;
+    //APIをたたいて変数に代入する処理を書くAPIからのデータがrespose.dataに入る。
+
+    //setDataでdataにresponse.dataを代入する。
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <RecentSchedule data={data}/>
     </div>
   );
 }
