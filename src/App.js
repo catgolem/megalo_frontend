@@ -30,7 +30,7 @@ function App() {
     // }
   }
 
-  function getTask(){
+  function getTask(userId){
     const requestUrl = "https://func-schedule.azurewebsites.net/api/TaskGet?code=I-A05Xoz0TAhmmrO6liS3S3eqXy0QHj7XihVcwVdrX4hAzFuMH5UbQ==&userId="+userId;
     axios.get(requestUrl)
     .then(response=>{
