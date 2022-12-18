@@ -3,7 +3,8 @@
     "routes": [
       {
         "route": "/",
-        "allowedRoles": ["authenticated"]
+        "allowedRoles": ["authenticated"],
+        "redirect":"/login"
       },
       {
         "route": "/login",
