@@ -17,6 +17,7 @@ function App() {
     { title: "kadai", content: "", date:20221219, start:1500}
   ]);
   const[userId,setUserId] = useState("");
+  const[control,setControl] = useState(true);
 
   async function getUserInfo() {
     // try{
@@ -44,15 +45,17 @@ function App() {
 
   useLayoutEffect(()=>{
     getUserInfo();
+
     if(userId === ""){
       console.log("getfailed");
     }
+    
     console.log("userId:"+userId);
-  });
 
-  useEffect(()=>{    
     getTask(userId);
-  });
+    localStorage.setItem("tasks",data);
+
+  },[]);
 
   return (
     <div>
