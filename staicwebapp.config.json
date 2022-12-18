@@ -4,7 +4,7 @@
       {
         "route": "/",
         "allowedRoles": ["authenticated"],
-        "redirect":"/login"
+        "redirect":"/.atuh/login/github"
       },
       {
         "route": "/login",
@@ -24,7 +24,7 @@
         "rewrite": "/invalid-invitation-error.html"
       },
       "401": {
-        "redirect": "/login",
+        "redirect": "/.atuh/login/github",
         "statusCode": 302
       },
       "403": {

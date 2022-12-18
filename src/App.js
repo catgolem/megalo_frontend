@@ -40,8 +40,8 @@ function App() {
     ).catch(e=>console.log(e));
   }
 
-  useLayoutEffect(()=>async ()=>{
-    await getUserInfo();
+  useLayoutEffect(()=>{
+    getUserInfo();
     if(userId === ""){
       console.log("getfailed");
     }
