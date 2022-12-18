@@ -1,6 +1,5 @@
-import userEvent from "@testing-library/user-event";
 import axios from "axios";
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form";
 
 export function AddEventButton(){    
@@ -17,26 +16,20 @@ export function AddEventButton(){
         justifyContent: "center",
     };
 
-    function postTask(props){
-        axios
-        .post("https://func-schedule.azurewebsites.net/api/TaskPost?code=wejIPY8x1mEGchgHCKtizV9xdfQm1e87PwO_uUoDXZWxAzFubz9R5g=="
-        ,{
-          "title": "眠れると思うな",
-          "content": "終わりはない",
-          "date": "2022-12-17",
-          "tag": "hackathon",
-          "place": "ぐーぐるまっぷ",
-          "url": "ゆーあーるえる",
-          "userId": "123456789",
-          "taskNumber": 4
-        })
-        .then(response=>console.log(response))
-        .catch(e=>console.log(e));
-      }
     const [showMenu, setShowMenu] = useState(false);
 
     const ToggleShowMenu = (bool)=>{
         setShowMenu(bool);
+    }
+
+    const PostData = async (data)=>{
+        try{
+            const res = await axios.post("https://func-schedule.azurewebsites.net/api/TaskPost?code=wejIPY8x1mEGchgHCKtizV9xdfQm1e87PwO_uUoDXZWxAzFubz9R5g==", data);
+            console.log(res);
+        }catch(e){
+            console.log(e);
+        }
+        
     }
 
 
@@ -87,16 +80,6 @@ export function AddEventButton(){
                     </select>
                 )
             }
-        }
-
-        const PostData = async (data)=>{
-            try{
-                const res = await axios.post("https://func-schedule.azurewebsites.net/api/TaskPost?code=wejIPY8x1mEGchgHCKtizV9xdfQm1e87PwO_uUoDXZWxAzFubz9R5g==", data);
-                console.log(res);
-            }catch(e){
-                console.log(e);
-            }
-            
         }
 
         const handleSubmit = ()=>{
@@ -161,6 +144,18 @@ export function AddEventButton(){
     return(
         <>
             <button onClick={()=>ToggleShowMenu(true)} className="btn p-10">+</button>
+            <button onClick={()=>PostData({
+                title: "title",
+                content: "content",
+                date: "2022-12-18",
+                start: "hh:mm",
+                end: "hh:mm",
+                tag: "tag",
+                place: "place",
+                url: "url",
+                userId: "123456789",
+                taskNumber: 1
+            })}>adddata</button>
             {showMenu && <AddEventMenu/>}
         </>
     )
