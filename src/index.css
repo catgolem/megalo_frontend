@@ -1,11 +1,11 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 .btn{
   @apply bg-yellow-100 duration-300 rounded-xl hover:bg-green-300;
 }
 
-@tailwind utilities;
 
 body {
   margin: 0;

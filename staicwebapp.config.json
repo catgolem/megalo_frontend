@@ -1,0 +1,36 @@
+{
+    "trailingSlash": "auto",
+    "routes": [
+      {
+        "route": "/",
+        "allowedRoles": ["authenticated"]
+      },
+      {
+        "route": "/login",
+        "rewrite": "/.auth/login/github?post_login_redirect_uri=https://wonderful-moss-0997e5b00.2.azurestaticapps.net/"
+      },
+      {
+        "route": "/.auth/login/twitter",
+        "statusCode": 404
+      },
+      {
+        "route": "/logout",
+        "redirect": "/.auth/logout"
+      }
+    ],
+    "responseOverrides": {
+      "400": {
+        "rewrite": "/invalid-invitation-error.html"
+      },
+      "401": {
+        "redirect": "/login",
+        "statusCode": 302
+      },
+      "403": {
+        "rewrite": "/custom-forbidden-page.html"
+      },
+      "404": {
+        "rewrite": "/404.html"
+      }
+    }
+}
