@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
 import { useForm } from "react-hook-form";
-import axios from 'axios';
 
 export function AddEventButton(){    
     const overlay = {
@@ -145,7 +144,7 @@ export function AddEventButton(){
     return(
         <>
             <button onClick={()=>ToggleShowMenu(true)} className="btn p-10">+</button>
-            <button onClick={()=>PostData({
+            {/* <button onClick={()=>PostData({
                 title: "title",
                 content: "content",
                 date: "2022-12-18",
@@ -156,7 +155,7 @@ export function AddEventButton(){
                 url: "url",
                 userId: "123456789",
                 taskNumber: 1
-            })}>adddata</button>
+            })}>adddata</button> */}
             {showMenu && <AddEventMenu/>}
         </>
     )
