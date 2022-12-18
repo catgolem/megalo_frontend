@@ -30,14 +30,16 @@ function App() {
     // }
   }
 
-  function getTask(key){
+  async function getTask(key){
     const requestUrl = "https://func-schedule.azurewebsites.net/api/TaskGet?code=I-A05Xoz0TAhmmrO6liS3S3eqXy0QHj7XihVcwVdrX4hAzFuMH5UbQ==&userId="+ key;
-    axios.get(requestUrl)
-    .then(response=>{
+    try{
+      var response = await axios.get(requestUrl)
       console.log(response)
       setData(response.data)
-    }
-    ).catch(e=>console.log(e));
+    }catch(e){
+      console.log(e);
+    };
+    console.log(data)
   }
 
   useLayoutEffect(()=>{
