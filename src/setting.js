@@ -1,34 +1,45 @@
 import "./App.css";
-import React,{ useState } from "react";
+import React,{ useEffect,useLayoutEffect, useState } from "react";
 
 function Setting () {
     const [inputValue, setInputValue] = useState("");
     const [selectColor, setSelectColor] = useState("");
-    const [tags, setTags] = useState([]);
-  
+    const test = localStorage.getItem('tags');
+    const test2 = test ? JSON.parse(localStorage.getItem('tags')) : [];
+    console.dir(test);
+
+    const [tags, setTags] = useState(test2);
+    // setTags(localStorage.getItem('tags'))
+
     const handleChange = (e) => {
       setInputValue(e.target.value);
     };
 
     const changeColor = (e) => {
-      console.log(e.target.value);
       setSelectColor(e.target.value);
     }
   
     const handleSubmit = (e) => {
+      // var list = [];
       e.preventDefault();
       
-  
-      /* 新しいTodoを宣言 */
+      /* 新しいTagを宣言 */
       const Tag = {
         inputValue: inputValue,
         id: tags.length,
         color: selectColor,
       };
+      
+      // list.push(Tag);
+      // console.log(list)
+      const json = JSON.stringify([Tag, ...tags], undefined, 1);
+      localStorage.setItem('tags', json);
       setTags([Tag, ...tags]);
       setInputValue("");
+      setSelectColor("");
     }
-  
+    
+
      const handleEdit = (id, inputValue) => {
       const newTags = tags.map((tag) => {
         if(tag.id === id){
@@ -42,8 +53,15 @@ function Setting () {
   
     const handleDelete = (id) => {
       const newTags = tags.filter((tag) => tag.id !== id);
+      const json = JSON.stringify(newTags, undefined, 1);
+      localStorage.setItem('tags', json);
       setTags(newTags);
     } 
+
+    
+    useLayoutEffect(() => {
+      localStorage.getItem('tags');
+    });
     
     return (
         <div className="App">
