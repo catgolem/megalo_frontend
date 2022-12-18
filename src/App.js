@@ -30,8 +30,8 @@ function App() {
     // }
   }
 
-  function getTask(userId){
-    const requestUrl = "https://func-schedule.azurewebsites.net/api/TaskGet?code=I-A05Xoz0TAhmmrO6liS3S3eqXy0QHj7XihVcwVdrX4hAzFuMH5UbQ==&userId="+userId;
+  function getTask(key){
+    const requestUrl = "https://func-schedule.azurewebsites.net/api/TaskGet?code=I-A05Xoz0TAhmmrO6liS3S3eqXy0QHj7XihVcwVdrX4hAzFuMH5UbQ==&userId="+ key;
     axios.get(requestUrl)
     .then(response=>{
       console.log(response)
@@ -45,10 +45,11 @@ function App() {
     if(userId === ""){
       console.log("getfailed");
     }
+    // setUserId("123456789")
     console.log("userId:"+userId);
-    getTask("123456789");
+    getTask(userId);
     // getTask(userId);
-  },[]);
+  });
   return (
     <div>
       <div className='grid grid-rows-[100px,_30px,_1000px]'>
