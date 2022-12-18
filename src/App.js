@@ -30,7 +30,7 @@ function App() {
   });
   return (
     <div>
-      <div className='grid grid-rows-[100px,_30px,_1000px]'>
+      <div className='grid grid-rows-[100px,_30px]'>
         <RecentSchedule data={data}/>
         <div className='fixed bottom-10 right-10 p-2'><AddEventButton/></div>
       </div>
