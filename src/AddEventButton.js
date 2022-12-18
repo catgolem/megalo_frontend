@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 
-export function AddEventButton(){    
+export function AddEventButton(props){    
     const overlay = {
         position: "fixed",
         top: 0,
@@ -83,6 +83,7 @@ export function AddEventButton(){
         }
 
         const handleSubmit = ()=>{
+            const todayData = props.data.filter((dt)=>dt.date===date);
             const data = {
                 title: title,
                 content: content,
@@ -92,12 +93,13 @@ export function AddEventButton(){
                 tag: tag,
                 place: location,
                 url: url,
-                userId: "123456789",
-                taskNumber: 1
+                userId: props.userId,
+                taskNumber: todayData.length
             }
             console.log(data);
 
             PostData(data);
+            ToggleShowMenu(false);
         }
         const optionsItem = options.map((o)=>o);
 
@@ -127,16 +129,6 @@ export function AddEventButton(){
                     </div>
                 </div>
             </div>
-        )
-    }
-
-    const Test =()=>{
-        const {register, handleSubmit} = useForm();
-        return(
-            <form onSubmit={handleSubmit(d=>console.log(d))}>
-                <input {...register("tad")}/>
-                <button className="btn">btn</button>
-            </form>
         )
     }
     
