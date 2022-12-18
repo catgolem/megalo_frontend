@@ -1,4 +1,5 @@
 import userEvent from "@testing-library/user-event";
+import axios from "axios";
 import { useRef, useState } from "react"
 import { useForm } from "react-hook-form";
 
@@ -46,7 +47,7 @@ export function AddEventButton(){
         //Form
         const [title, setTitle] = useState();
         const today = new Date();
-        const [date, setDate] = useState();
+        const [date, setDate] = useState(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
         const [start, setStart] = useState();
         const [end, setEnd] = useState();
         const [tag, setTag] = useState();
@@ -87,18 +88,33 @@ export function AddEventButton(){
                 )
             }
         }
+
+        const PostData = async (data)=>{
+            try{
+                const res = await axios.post("https://func-schedule.azurewebsites.net/api/TaskPost?code=wejIPY8x1mEGchgHCKtizV9xdfQm1e87PwO_uUoDXZWxAzFubz9R5g==", data);
+                console.log(res);
+            }catch(e){
+                console.log(e);
+            }
+            
+        }
+
         const handleSubmit = ()=>{
             const data = {
                 title: title,
+                content: content,
                 date: date,
                 start: start,
                 end: end,
-                content: content,
                 tag: tag,
-                location: location,
-                url: url
+                place: location,
+                url: url,
+                userId: "123456789",
+                taskNumber: 1
             }
             console.log(data);
+
+            PostData(data);
         }
         const optionsItem = options.map((o)=>o);
 
