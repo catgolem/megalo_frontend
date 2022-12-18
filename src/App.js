@@ -10,20 +10,13 @@ import { AddEventButton } from './AddEventButton';
 import axios from 'axios';
 
 function App() {
-  const [data ,setData] = useState([
-    { title: "adobi", content: "", date:20221217, start:900},
-    { title: "kadai", content: "", date:20221217, start:1300},
-    { title: "kadai", content: "", date:20221218, start:1100},
-    { title: "kadai", content: "", date:20221219, start:1500}
-  ]);
+  const [data ,setData] = useState([]);
   const[userId,setUserId] = useState("");
-  const[control,setControl] = useState(true);
 
   async function getUserInfo() {
     // try{
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
+      const response = await axios.get('/.auth/me');
+      const { clientPrincipal } = response;
       setUserId(clientPrincipal.userId)
     // }catch(e){
     //   console.log(e);
@@ -50,7 +43,7 @@ function App() {
       console.log("getfailed");
     }
     
-    console.log("userId:"+userId);
+    console.log("userId:" + userId);
 
     getTask(userId);
     localStorage.setItem("tasks",data);
@@ -60,7 +53,7 @@ function App() {
   return (
     <div>
       <div className='grid grid-rows-[100px,_30px,_1000px]'>
-        <RecentSchedule data={data}/>
+        <RecentSchedule title={data.title} content={data.content} date={data.date} start={data.start}  />
         <div className='fixed bottom-10 right-10 p-2'><AddEventButton userId={userId} data={data}/></div>
       </div>
       <Tabs className="Tab">

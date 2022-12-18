@@ -1,11 +1,14 @@
 import { useState } from "react";
 
 export function SimpleSchedule(props){
-    const item = props.schedules.map((schedule)=><p>{schedule}</p>)
     return(
         <div className="border-2">
+            <div>{props.title}</div>
+            <p>{props.content}</p>
             <p>{props.date}</p>
-            {item}
+            <p>{props.start}</p>
+            <p>{props.end}</p>
+
         </div>
     )
 }
