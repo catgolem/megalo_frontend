@@ -47,11 +47,13 @@ function App() {
     if(userId === ""){
       console.log("getfailed");
     }
-    // setUserId("123456789")
     console.log("userId:"+userId);
-    getTask(userId);
-    // getTask(userId);
   });
+
+  useEffect(()=>{    
+    getTask(userId);
+  });
+
   return (
     <div>
       <div className='grid grid-rows-[100px,_30px,_1000px]'>
