@@ -52,8 +52,8 @@ function App() {
 
   return (
     <div>
-      <div className='grid grid-rows-[100px,_30px,_1000px]'>
-        <RecentSchedule title={data.title} content={data.content} date={data.date} start={data.start}  />
+      <div className='grid grid-rows-[100px,_30px]'>
+        <RecentSchedule title={data.title} content={data.content} date={data.date} start={data.start} />
         <div className='fixed bottom-10 right-10 p-2'><AddEventButton userId={userId} data={data}/></div>
       </div>
       <Tabs className="Tab">

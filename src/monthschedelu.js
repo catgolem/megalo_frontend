@@ -12,27 +12,36 @@ function Calendar () {
         const today = new Date();
         const weeks = [];
         const monthdays = [31,28,31,30,31,30,31,31,30,31,30,31];
-        let firstday = today.getDate() - today.getDay() - 1;
+        let firstday = today.getDate() - today.getDay() - 1;//その週の日曜日の日付
         if(n !== 0){
             if(n>0){
                 for(let a = 0; a < mvmonth; a ++){
                     //来月
-                    firstday =- monthdays[(today.getMonth()+a) % 12];
+                    firstday = firstday - monthdays[(today.getMonth()+a) % 12];
                 }
             }else if(n<0){
                 for(let b = 0; b > mvmonth; b--){
                     //先月
-                    firstday =+ monthdays[today.getMonth()+b-1];
+                    firstday = firstday+ monthdays[(today.getMonth()+b-1) % 12];
                 }
             }
         }
+        console.log(firstday);
     
-            while(firstday > 1){
-              firstday -= 7;
+        if(firstday > 0){
+            while(firstday > 0 ){
+              firstday = firstday - 7;
             }
+        }else if(firstday < -7){
+            while(firstday < -7){
+                firstday = firstday + 7;
+            }
+        }
+
+        console.log(firstday);
           
             let maxday = monthdays[(today.getMonth()-1 + n) % 12];
-            for(let i = 0;i < 5;++i){
+            for(let i = 0;i < 6;i++){
               const days = []
               if(i !== 0){
                 maxday = monthdays[(today.getMonth() + n) % 12];
