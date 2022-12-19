@@ -1,21 +1,52 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useState } from "react";
 
 export function SimpleSchedule(props){
-    const item = props.schedules.map((schedule)=><p>{schedule}</p>)
     return(
         <div className="border-2">
+            <div>{props.title}</div>
+            <p>{props.content}</p>
             <p>{props.date}</p>
-            {item}
+            <p>{props.start}</p>
+            <p>{props.end}</p>
+
         </div>
     )
 }
 
 export function RecentSchedule(props){
     const today = new Date();
-    const [date, setDate] = useState(today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate());
+    const [date, setDate] = useState([today.getFullYear(), (today.getMonth()+1), today.getDate()]);
 
-    const handleClick= (n)=>{
-        setDate(date+n);
+    const CheckDate = (date)=>{
+        let monthday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        if(date[0] % 4 === 0){
+            monthday[1] = 29;
+        }
+
+        if(date[2] > monthday.at(date[1] - 1)){
+            date[2] -= monthday.at(date[1]-1);
+            date[1]++;
+        }
+        else if(date[2] < 1){
+            date[2] += monthday.at(date[1]-2);
+            date[1]--;
+        }
+
+        if(date[1] > 12){
+            date[1] -= 12;
+            date[0]++;
+        }
+        else if(date[1] < 1){
+            date[1] += 12;
+            date[0]--;
+        }
+
+        return [date[0], date[1], date[2]];
+    }
+    const handleClick= (n)=>{ 
+        let tempdate = date[2] + n;
+        
+        setDate(CheckDate([date[0], date[1], tempdate]));
     }
     const ReturnSch= (d)=>{
         const dateData = props.data.filter((dt)=>dt.date===d);
@@ -31,9 +62,9 @@ export function RecentSchedule(props){
             <button onClick={()=>handleClick(-1)} className="btn">
                 ←</button>
             <div className="grid grid-cols-3">
-                <SimpleSchedule date={date} schedules={ReturnSch(date)}/>
-                <SimpleSchedule date={date+1} schedules={ReturnSch(date+1)}/>
-                <SimpleSchedule date={date+2} schedules={ReturnSch(date+2)}/>
+                <SimpleSchedule date={CheckDate(date).join('-')} schedules={ReturnSch(CheckDate(date).join('-'))}/>
+                <SimpleSchedule date={CheckDate([date[0], date[1], date[2]+1]).join('-')} schedules={ReturnSch(CheckDate([date[0], date[1], date[2]+1]).join('-'))}/>
+                <SimpleSchedule date={CheckDate([date[0], date[1], date[2]+2]).join('-')} schedules={ReturnSch(CheckDate([date[0], date[1], date[2]+2]).join('-'))}/>
             </div>
             <button onClick={()=>handleClick(1)} className="btn">→</button>
         </div>

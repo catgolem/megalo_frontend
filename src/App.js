@@ -5,34 +5,56 @@ import Todaysche from './Todayschedule';
 import Calendar from './monthschedelu';
 import Setting from './setting';
 import { RecentSchedule } from './RecentSchedule';
-import {useLayoutEffect, useState } from "react";
+import {useEffect, useState, useLayoutEffect } from "react";
 import { AddEventButton } from './AddEventButton';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
 
 function App() {
-  const [data ,setData] = useState([
-    { title: "adobi", content: "", date:20221217, start:900},
-    { title: "kadai", content: "", date:20221217, start:1300},
-    { title: "kadai", content: "", date:20221218, start:1100},
-    { title: "kadai", content: "", date:20221219, start:1500}
-  ]);
+  const [data ,setData] = useState([]);
+  const[userId,setUserId] = useState("");
 
-  function getTask(){
-    axios.get("https://func-schedule.azurewebsites.net/api/TaskGet?code=I-A05Xoz0TAhmmrO6liS3S3eqXy0QHj7XihVcwVdrX4hAzFuMH5UbQ==&userId=123456789")
-    .then(response=>setData(response.data))
-    .catch(e=>console.log(e));
+  async function getUserInfo() {
+    // try{
+      const response = await axios.get('/.auth/me');
+      const { clientPrincipal } = response;
+      setUserId(clientPrincipal.userId)
+    // }catch(e){
+    //   console.log(e);
+    //   return "123456789";
+    // }
   }
 
-  useLayoutEffect(() => {
-    // postTask()
-    getTask()
-  });
+  async function getTask(key){
+    const requestUrl = "https://func-schedule.azurewebsites.net/api/TaskGet?code=I-A05Xoz0TAhmmrO6liS3S3eqXy0QHj7XihVcwVdrX4hAzFuMH5UbQ==&userId="+ key;
+    try{
+      var response = await axios.get(requestUrl)
+      console.log(response)
+      setData(response.data)
+    }catch(e){
+      console.log(e);
+    };
+    console.log(data)
+  }
+
+  useLayoutEffect(()=>{
+    getUserInfo();
+
+    if(userId === ""){
+      console.log("getfailed");
+    }
+    
+    console.log("userId:" + userId);
+
+    getTask(userId);
+    localStorage.setItem("tasks",data);
+
+  },[]);
+
   return (
     <div>
       <div className='grid grid-rows-[100px,_30px]'>
-        <RecentSchedule data={data}/>
-        <div className='fixed bottom-10 right-10 p-2'><AddEventButton/></div>
+        <RecentSchedule title={data.title} content={data.content} date={data.date} start={data.start} />
+        <div className='fixed bottom-10 right-10 p-2'><AddEventButton userId={userId} data={data}/></div>
       </div>
       <Tabs className="Tab">
         <TabList>
